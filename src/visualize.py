@@ -27,4 +27,29 @@ def plot_price_with_ma(input_path="data/processed/corn_futures_indicators.csv",
     plt.close()
 
 if __name__ == "__main__":
+    plot_price_with_ma() 
+def plot_volume(input_path="data/processed/corn_futures_indicators.csv",
+                 output_path="figures/volume.png"):
+    """
+    Plots daily trading volume as a bar chart.
+    Helps identify whether price moves are backed by strong participation
+    or are likely noise from thin trading.
+    """
+    data = pd.read_csv(input_path, index_col="Date", parse_dates=True)
+
+    plt.figure(figsize=(12, 5))
+    plt.bar(data.index, data["Volume"], color="steelblue", width=1)
+
+    plt.title("Corn Futures (ZC=F) — Daily Trading Volume")
+    plt.xlabel("Date")
+    plt.ylabel("Volume (contracts)")
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+
+    plt.savefig(output_path, dpi=150)
+    print(f"Chart saved to {output_path}")
+    plt.close()
+
+if __name__ == "__main__":
     plot_price_with_ma()
+    plot_volume()
