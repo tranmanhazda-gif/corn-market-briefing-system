@@ -70,3 +70,14 @@ shows whether USDA's supply/demand outlook is tightening or loosening over time.
 A falling trend generally supports higher prices; a rising trend generally pressures
 prices lower. A single report matters less than the direction of the trend.
 """)
+st.header("Market Summary")
+
+with open("reports/market_summary.md", "r") as f:
+    summary_content = f.read()
+st.markdown(summary_content)
+
+st.header("Market Journal")
+
+with open("corn_market_journal.md", "r") as f:
+    journal_content = f.read()
+st.markdown(journal_content)
