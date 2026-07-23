@@ -58,3 +58,15 @@ st.markdown("""
 behind it. A sharp price move on unusually low volume (like the most recent bar above)
 is a signal to be cautious rather than assume the move will continue.
 """)
+st.header("USDA WASDE Tracker")
+
+wasde = pd.read_csv("data/wasde_tracker.csv", parse_dates=["release_date"])
+st.dataframe(wasde, use_container_width=True)
+
+st.image("figures/wasde_ending_stocks.png")
+st.markdown("""
+**What this tells a trader:** tracking ending stocks across successive WASDE reports
+shows whether USDA's supply/demand outlook is tightening or loosening over time.
+A falling trend generally supports higher prices; a rising trend generally pressures
+prices lower. A single report matters less than the direction of the trend.
+""")
