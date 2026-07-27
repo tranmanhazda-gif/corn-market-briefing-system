@@ -36,3 +36,58 @@ I'm an Agricultural Business & Management student at NC State University pursuin
 - **Fundamentals:** USDA WASDE reports (usda.gov)
 
 ## Project Structure
+corn-market-briefing-system/
+├── dashboard/
+│   └── app.py                  # Streamlit dashboard
+├── data/
+│   ├── raw/                    # Raw downloaded data
+│   ├── processed/              # Cleaned data with indicators
+│   └── wasde_tracker.csv       # Manually tracked USDA WASDE data
+├── figures/                    # Generated charts
+├── reports/
+│   ├── market_summary.md
+│   └── weekly_market_report_template.md
+├── src/
+│   ├── data_download.py
+│   ├── clean_data.py
+│   ├── indicators.py
+│   ├── visualize.py
+│   └── wasde_tracker.py
+├── corn_market_journal.md      # Daily trading journal
+└── requirements.txt
+```
+
+## How to Run
+
+1. Clone the repo and set up a virtual environment:
+```
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+2. Run the data pipeline in order:
+```
+python src/data_download.py
+python src/clean_data.py
+python src/indicators.py
+python src/visualize.py
+python src/wasde_tracker.py
+```
+
+3. Launch the dashboard:
+```
+streamlit run dashboard/app.py
+```
+
+## Screenshots
+
+### Dashboard Overview
+![Dashboard Overview](screenshots/dashboard_overview.png)
+
+## Future Improvements
+
+- Automate WASDE data entry via USDA API/PDF parsing
+- Add contract-specific (not continuous) futures tracking
+- Deploy dashboard to Streamlit Community Cloud for a live link
+- Expand to additional commodities (soybeans, wheat)
