@@ -1,0 +1,13 @@
+[
+  {
+    "date": "2026-07-23",
+    "close_price": "487.00",
+    "change": "+0.46%",
+    "guess": "I think there was a sharp dip in the afternoon because too much selling happened at that moment, which caused the price to decrease a bit.",
+    "actual": "Corn extending a broader rally, up roughly 60 cents since the June 30 crop report. Dry, hot 15-day weather forecast for the US Midwest threatening yield. Crop condition ratings came in at 67% good-to-excellent, down from 68%. Crude oil jumped on Middle East tensions, boosting biofuel demand outlook.",
+    "bullish": "Dry/hot weather forecast threatening yield; crop conditions rated slightly worse than expected; crude oil strength supporting ethanol demand",
+    "bearish": "Price already up ~60 cents since June 30 - may be due for a pullback; the afternoon dip shows real two-way trading",
+    "opinion": "",
+    "confidence": "8/10"
+  }
+]

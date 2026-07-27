@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import json
+from datetime import date
 
 st.set_page_config(page_title="Corn Market Briefing System", layout="wide")
 
@@ -78,6 +80,54 @@ st.markdown(summary_content)
 
 st.header("Market Journal")
 
-with open("corn_market_journal.md", "r") as f:
-    journal_content = f.read()
-st.markdown(journal_content)
+# Load journal entries
+with open("data/journal_entries.json", "r") as f:
+    entries = json.load(f)
+
+# Show only the most recent entry
+if entries:
+    latest = entries[-1]
+    st.subheader(f"📅 {latest['date']}")
+    st.write(f"**Close Price:** ${latest['close_price']} | **Change:** {latest['change']}")
+    st.write(f"**My guess before checking news:** {latest['guess']}")
+    st.write(f"**What actually happened:** {latest['actual']}")
+    st.write(f"**Bullish factors:** {latest['bullish']}")
+    st.write(f"**Bearish factors:** {latest['bearish']}")
+    st.write(f"**My opinion:** {latest['opinion']}")
+    st.write(f"**Confidence:** {latest['confidence']}/10")
+else:
+    st.info("No journal entries yet.")
+
+st.divider()
+
+# Form to add a new entry
+with st.expander("➕ Add Today's Entry"):
+    with st.form("new_entry_form"):
+        entry_date = st.date_input("Date", value=date.today())
+        close_price = st.text_input("Close Price ($)")
+        change = st.text_input("Change (%)")
+        guess = st.text_area("My guess before checking news")
+        actual = st.text_area("What actually happened")
+        bullish = st.text_area("Bullish factors")
+        bearish = st.text_area("Bearish factors")
+        opinion = st.text_area("My opinion - where does this go next?")
+        confidence = st.slider("Confidence", 1, 10, 5)
+
+        submitted = st.form_submit_button("Save Entry")
+
+        if submitted:
+            new_entry = {
+                "date": str(entry_date),
+                "close_price": close_price,
+                "change": change,
+                "guess": guess,
+                "actual": actual,
+                "bullish": bullish,
+                "bearish": bearish,
+                "opinion": opinion,
+                "confidence": str(confidence)
+            }
+            entries.append(new_entry)
+            with open("data/journal_entries.json", "w") as f:
+                json.dump(entries, f, indent=2)
+            st.success("Entry saved! Refresh to see it as the latest entry.")
